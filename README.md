@@ -43,6 +43,7 @@ Based on the `Content` column and using
   * TruncatedSVD
   
 Metrics are being exported from the above stages.
+
 *Sample tsv*
 ```
 classifier	feature	accuracy	precision	recall	f-measure	auc
@@ -54,6 +55,7 @@ Custom Random Forest	SVD	0.7054410225628713	0.7018007635639213	0.688753246753246
 ```
 
 Predictions are finally done with a parameterized **RandomForest** using **TruncatedSVD**
+
 *Sample tsv*
 ```
 Test_Document_ID	Predicted_Category
