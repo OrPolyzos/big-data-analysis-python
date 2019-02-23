@@ -24,16 +24,6 @@ from utils.LoggerProvider import LoggerProvider
 pandas.options.mode.chained_assignment = None
 
 
-def get_shingles(text, char_ngram=5):
-    return set(text[head:head + char_ngram] for head in range(0, len(text) - char_ngram))
-
-
-def jaccard(set_a, set_b):
-    set_intersection = set_a & set_b
-    set_union = set_a | set_b
-    return float(len(set_intersection)) / float(len(set_union))
-
-
 class ApplicationCoordinator(object):
 
     def __init__(self):
@@ -65,8 +55,8 @@ class ApplicationCoordinator(object):
         self._logger.info('Program started')
         self._logger.info('PID: {0}'.format(os.getpid()))
 
-        # self._create_word_cloud()
-        # self._find_duplicates()
+        self._create_word_cloud()
+        self._find_duplicates()
         self._classify()
         # self._explore_classification_params()
 
@@ -239,10 +229,8 @@ class ApplicationCoordinator(object):
         rf = RandomForestRegressor()
         rf_random = RandomizedSearchCV(estimator=rf, param_distributions=random_grid, n_iter=50, cv=3, verbose=2, random_state=42, n_jobs=10)
         rf_random.fit(train_data, train_labels_ids)
-
         print(rf_random.best_params_)
 
 
 if __name__ == "__main__":
     ApplicationCoordinator().run()
-
